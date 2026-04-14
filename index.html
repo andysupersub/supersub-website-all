@@ -244,11 +244,124 @@ p  { font-size: 18px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.
 /* ═══════════════════════
    LOGO BAR
 ═══════════════════════ */
-.logo-bar { padding: 24px 48px; border-bottom: 1px solid var(--border); }
-.logo-bar-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; }
-.logo-bar-label { font-size: 12px; font-weight: 400; color: var(--muted); white-space: nowrap; padding-right: 28px; border-right: 1px solid var(--border); margin-right: 28px; }
-.logo-items { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
-.logo-item { font-size: 13px; font-weight: 500; color: #b0b8cc; letter-spacing: 0.02em; }
+
+/* ═══════════════════════════════
+   PARTNER LOGO BAR
+═══════════════════════════════ */
+.logo-bar {
+  padding: 20px 48px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  overflow: hidden;
+}
+.logo-bar-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.logo-bar-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-right: 28px;
+  border-right: 1px solid var(--border);
+  margin-right: 28px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.logo-track {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+/* fade edges */
+.logo-track::before,
+.logo-track::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 48px;
+  z-index: 2;
+  pointer-events: none;
+}
+.logo-track::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
+.logo-track::after  { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+
+.logo-items {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: logoScroll 32s linear infinite;
+  width: max-content;
+}
+.logo-items:hover { animation-play-state: paused; }
+@keyframes logoScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.logo-item-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* Logo image base */
+.logo-img {
+  height: 28px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.2s;
+}
+.logo-img:hover { opacity: 0.8; }
+
+/* White background logos — just desaturate/fade */
+.logo-png-white {
+  filter: grayscale(100%) opacity(0.5);
+}
+.logo-png-white:hover {
+  filter: grayscale(0%) opacity(0.85);
+}
+
+/* SVG logos with dark color (Rinnai red, Manrose, Stiebel) */
+.logo-svg-color {
+  filter: grayscale(100%) opacity(0.45);
+}
+.logo-svg-color:hover {
+  filter: grayscale(0%) opacity(1);
+}
+
+/* SVG logos that are black on transparent (Mitre 10) */
+.logo-svg-dark {
+  filter: opacity(0.4);
+}
+.logo-svg-dark:hover {
+  filter: opacity(0.75);
+}
+
+/* Dark background logos — show in a small rounded container */
+.logo-dark-bg {
+  filter: grayscale(100%) opacity(0.5);
+  border-radius: 4px;
+  height: 24px;
+}
+.logo-dark-bg:hover {
+  filter: grayscale(0%) opacity(0.85);
+}
+
+@media (max-width: 768px) {
+  .logo-bar { padding: 16px 20px; }
+  .logo-bar-label { display: none; }
+}
+
 
 /* ═══════════════════════
    SECTIONS
@@ -525,17 +638,40 @@ footer { background: var(--navy); padding: 60px 48px 28px; }
   <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
 </section>
 
-<!-- ═══ SUPPLIER BAR ═══ -->
+<!-- ═══ PARTNER BAR ═══ -->
 <div class="logo-bar">
   <div class="logo-bar-inner">
-    <span class="logo-bar-label">Trusted suppliers</span>
-    <div class="logo-items">
-      <span class="logo-item">Mitre 10</span>
-      <span class="logo-item">Rinnai</span>
-      <span class="logo-item">JNL</span>
-      <span class="logo-item">Carter Holt Harvey</span>
-      <span class="logo-item">Resene</span>
-      <span class="logo-item">Carpet Court</span>
+    <span class="logo-bar-label">Proudly working with</span>
+    <div class="logo-track">
+      <div class="logo-items">
+        <div class="logo-item-wrap"><img src="/assets/logos/mitre10.svg" alt="Mitre 10" class="logo-img logo-svg-dark"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/rinnai.svg" alt="Rinnai" class="logo-img logo-svg-color"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/mitsubishi.png" alt="Mitsubishi Electric" class="logo-img logo-png-white"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/jnl.png" alt="JNL Juken NZ" class="logo-img logo-png-white"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/huntly.png" alt="Huntly Joinery" class="logo-img logo-png-white"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/robinhood.png" alt="Robinhood" class="logo-img logo-png-white"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/storeit4less.jpg" alt="Storeit4less" class="logo-img logo-png-white"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/plumbingworld.png" alt="Plumbing World" class="logo-img logo-dark-bg"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/armorsteel.png" alt="Armorsteel" class="logo-img logo-dark-bg"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/manrose.svg" alt="Manrose" class="logo-img logo-svg-color"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/stiebel.svg" alt="Stiebel Eltron" class="logo-img logo-svg-color"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/carpetcourt.avif" alt="Carpet Court" class="logo-img logo-png-white"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/challenger.gif" alt="Challenger" class="logo-img logo-png-white"/></div>
+        <!-- duplicate set for seamless loop -->
+        <div class="logo-item-wrap"><img src="/assets/logos/mitre10.svg" alt="Mitre 10" class="logo-img logo-svg-dark" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/rinnai.svg" alt="Rinnai" class="logo-img logo-svg-color" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/mitsubishi.png" alt="Mitsubishi Electric" class="logo-img logo-png-white" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/jnl.png" alt="JNL Juken NZ" class="logo-img logo-png-white" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/huntly.png" alt="Huntly Joinery" class="logo-img logo-png-white" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/robinhood.png" alt="Robinhood" class="logo-img logo-png-white" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/storeit4less.jpg" alt="Storeit4less" class="logo-img logo-png-white" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/plumbingworld.png" alt="Plumbing World" class="logo-img logo-dark-bg" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/armorsteel.png" alt="Armorsteel" class="logo-img logo-dark-bg" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/manrose.svg" alt="Manrose" class="logo-img logo-svg-color" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/stiebel.svg" alt="Stiebel Eltron" class="logo-img logo-svg-color" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/carpetcourt.avif" alt="Carpet Court" class="logo-img logo-png-white" aria-hidden="true"/></div>
+        <div class="logo-item-wrap"><img src="/assets/logos/challenger.gif" alt="Challenger" class="logo-img logo-png-white" aria-hidden="true"/></div>
+      </div>
     </div>
   </div>
 </div>
